@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pendaftaran Zakat</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        table { width: 70%; margin: auto; border-collapse: collapse; }
+        table, th, td { border: 1px solid black; }
+        th, td { padding: 10px; text-align: center; }
+        th { background-color: #A9CCE3; }
+    </style>
+</head>
+<body>
+    <h2>Daftar Pendaftar Zakat</h2>
+
+    <table>
+        <tr>
+            <th>No.</th>
+            <th>NAMA PESERTA ZAKAT</th>
+            <th>ZAKAT FITRAH</th>
+            <th>ZAKAT KIFARAT</th>
+            <th>ZAKAT HARTA</th>
+            {% if is_admin %} <th>Aksi</th> {% endif %}
+        </tr>
+        {% for row in data %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ row['Nama'] }}</td>
+            <td>Rp {{ row['Zakat Fitrah'] | int }}</td>
+            <td>Rp {{ row['Zakat Kifarat'] | int }}</td>
+            <td>Rp {{ row['Zakat Harta'] | int }}</td>
+            {% if is_admin %}
+                <td><a href="{{ url_for('edit', index=loop.index0) }}">Edit</a></td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+        <tr style="background-color: lightblue; font-weight: bold;">
+            <td colspan="2">Total Pembayaran Zakat</td>
+            <td>Rp {{ total_fitrah }}</td>
+            <td>Rp {{ total_kifarat }}</td>
+            <td>Rp {{ total_harta }}</td>
+        </tr>
+    </table>
+
+    {% if is_admin %}
+        <br><a href="{{ url_for('tambah_form') }}"><button>Tambah Data</button></a>
+        <br><a href="/logout">Logout Admin</a>
+    {% else %}
+        <br><a href="/login">Login sebagai Admin</a>
+    {% endif %}
+</body>
+</html>
