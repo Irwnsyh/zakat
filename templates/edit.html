@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Data Zakat</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        input {
+            padding: 10px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Edit Data Zakat</h2>
+    <form method="POST">
+        Nama: <input type="text" name="nama" value="{{ data['Nama'] }}" required><br><br>
+        Zakat Fitrah (Rp): <input type="number" name="zakat_fitrah" value="{{ data['Zakat Fitrah'] }}"><br><br>
+        Zakat Kifarat (Rp): <input type="number" name="zakat_kifarat" value="{{ data['Zakat Kifarat'] }}"><br><br>
+        Zakat Harta (Rp): <input type="number" name="zakat_harta" value="{{ data['Zakat Harta'] }}"><br><br>
+        <button type="submit">Simpan Perubahan</button>
+    </form>
+    <br>
+    <a href="/">Kembali</a>
+</body>
+</html>
