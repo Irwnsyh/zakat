@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, send_file
 import pandas as pd
 import os
 
@@ -88,6 +88,14 @@ def tambah_form():
         return redirect(url_for('index'))
 
     return render_template('tambah.html')
+
+# Route untuk download Excel (hanya untuk admin)
+@app.route('/download-excel')
+def download_excel():
+    if session.get('is_admin'):
+        return send_file(EXCEL_FILE, as_attachment=True)
+    else:
+        return "Akses ditolak. Anda bukan admin!"
 
 # Route untuk halaman edit data
 @app.route('/edit/<int:index>', methods=['GET', 'POST'])
